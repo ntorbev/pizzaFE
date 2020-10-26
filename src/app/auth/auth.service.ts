@@ -41,14 +41,14 @@ export class AuthService {
   createUser(authData: AuthData) {
     const getTokenParams = new HttpParams()
       .append('grant_type', 'password')
-      .append('username', 'bob')
-      .append('password', '123');
+      .append('username', authData.email)
+      .append('password', authData.password);
 
-    const getTokenHeaders = new HttpHeaders().append('Authorization', 'Basic ' + btoa('client:secret'));
+    // const getTokenHeaders = new HttpHeaders().append('Authorization', 'Basic ' + btoa('client:secret'));
     this.http.post(
-      'http://localhost:8080/oauth/token',
+      'http://localhost:8080/api/insertUser',
       { withCredentials: true },
-      { headers: getTokenHeaders, params: getTokenParams }
+      { params: getTokenParams }
     )
       .subscribe(
         res => console.log(res),
@@ -60,14 +60,13 @@ export class AuthService {
   login(authData: AuthData) {
     const getTokenParams = new HttpParams()
       .append('grant_type', 'password')
-      .append('username', 'bob')
-      .append('password', '123');
+      .append('username', authData.email)
+      .append('password', authData.password);
 
-    const getTokenHeaders = new HttpHeaders().append('Authorization', 'Basic ' + btoa('client:secret'));
     this.http.post<{ access_token: string; expires_in: number; scope: string; token_type: string }>(
       BACKEND_URL_TOKEN,
       { withCredentials: true },
-      { headers: getTokenHeaders, params: getTokenParams }
+      { params: getTokenParams }
     ).subscribe(
       response => {
         const token = response.access_token;
@@ -76,8 +75,6 @@ export class AuthService {
           const expiresInDuration = response.expires_in;
           this.setAuthTimer(expiresInDuration);
           this.isAuthenticated = true;
-          // this.userId = response.userId;
-          // this._userName = response.userName;
           this.authStatusListener.next(true);
           const now = new Date();
           const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
@@ -88,22 +85,6 @@ export class AuthService {
       error => this.authStatusListener.next(false)
     );
   }
-
-  // autoAuthUser() {
-  //   const authInformation = this.getAuthData();
-  //   if (!authInformation) {
-  //     return;
-  //   }
-  //   const now = new Date();
-  //   const expiresIn = authInformation.expirationDate.getTime() - now.getTime();
-  //   if (expiresIn > 0) {
-  //     this.token = authInformation.token;
-  //     this.isAuthenticated = true;
-  //     this.userId = authInformation.userId;
-  //     this.setAuthTimer(expiresIn / 1000);
-  //     this.authStatusListener.next(true);
-  //   }
-  // }
 
   logout() {
     this.token = null;

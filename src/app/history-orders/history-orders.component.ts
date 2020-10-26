@@ -11,6 +11,7 @@ export class HistoryOrdersComponent implements OnInit {
     holderName: string
     id: number
     orderPizza: string
+    quantity: string
   }[];
 
   constructor(private messageService: PizzaOrderService) {
@@ -20,6 +21,7 @@ export class HistoryOrdersComponent implements OnInit {
     this.messageService.getOrders().subscribe(res => {
       this.orders = res;
     });
+    console.log()
   }
 
 }

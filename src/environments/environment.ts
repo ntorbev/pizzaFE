@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://localhost:3000/api',
+  tokenUrl: 'http://localhost:8080/oauth/token',
+  insertPizzaOrder: 'http://localhost:8080/api/insertPizzaOrders',
+  getPizzaOrders: 'http://localhost:8080/api/getPizzaOrders'
 };
 
 /*

@@ -1,3 +1,25 @@
+:host {
+  display: flex;
+}
+
 .mat-list-base .mat-list-item {
   color: black;
+}
+
+.example-card {
+  max-width: 400px;
+}
+
+.example-card .mat-card-image {
+  max-width: 280px;
+}
+
+mat-card {
+  margin-right: 18px
+}
+
+
+.example-header-image {
+  background-image: url('https://png.pngtree.com/png-clipart/20190517/original/pngtree-pizza-slice-on-transparent-background-png-image_4099938.jpg');
+  background-size: cover;
 }

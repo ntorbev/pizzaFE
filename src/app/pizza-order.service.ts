@@ -1,8 +1,6 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
-import { AuthService } from 'src/app/auth/auth.service';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 
@@ -12,34 +10,23 @@ import { environment } from 'src/environments/environment';
 export class PizzaOrderService {
   private URL_INSERT = environment.insertPizzaOrder;
   private URL_GET_ORDERS = environment.getPizzaOrders;
-  private token: string;
 
-
-  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {
+  constructor(private http: HttpClient) {
   }
 
   sendOrder(order): Observable<any> {
-    const token = this.authService.getToken();
-    this.token = token;
     const getTokenParams = new HttpParams()
-      .append('pizzaOrder', order);
+      .append('pizzaOrder', order.name)
+      .append('quantity', order.quantity);
 
-    const getTokenHeaders = new HttpHeaders().append('Authorization', 'Bearer' + token);
     return this.http.post<{ access_token: string; expires_in: number; scope: string; token_type: string }>(
       this.URL_INSERT,
-      { withCredentials: true },
-      { headers: getTokenHeaders, params: getTokenParams }
+      null,
+      { params: getTokenParams }
     );
   }
 
   getOrders(): Observable<any> {
-    const token = this.authService.getToken();
-
-    const getTokenHeaders = new HttpHeaders().append('Authorization', 'Bearer' + token);
-    return this.http.post<{ access_token: string; expires_in: number; scope: string; token_type: string }>(
-      this.URL_GET_ORDERS,
-      { withCredentials: true },
-      { headers: getTokenHeaders}
-    );
+    return this.http.post<{ access_token: string; expires_in: number; scope: string; token_type: string }>(this.URL_GET_ORDERS, null);
   }
 }

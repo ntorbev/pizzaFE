@@ -1,10 +1,9 @@
-<mat-list>
-  <mat-list-item *ngFor="let order of orders">
-    <mat-icon matListIcon>folder</mat-icon>
-    <h3 matLine> {{order.holderName}} </h3>
+<mat-selection-list #shoes [multiple]="false">
+  <mat-list-option *ngFor="let order of orders" [value]="order">
     <p matLine>
       <span> {{order.orderPizza}} </span>
-      <span class="demo-2"> -- {{order.orderPizza}} </span>
+      <span> -- {{order.holderName}} </span>
+      <span *ngIf="order.quantity"> --you have ordered -- {{order.quantity}} </span>
     </p>
-  </mat-list-item>
-</mat-list>
+  </mat-list-option>
+</mat-selection-list>

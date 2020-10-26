@@ -8,16 +8,10 @@ import { AuthService } from 'src/app/auth/auth.service';
   templateUrl: './error.component.html',
   styleUrls: [ './error.component.css' ]
 })
-export class ErrorComponent implements OnInit, OnDestroy {
+export class ErrorComponent implements OnInit {
   closable: any;
 
   constructor(private router: Router, private authService: AuthService, @Inject(MAT_DIALOG_DATA) public data: { message: string }) {
-  }
-
-  // constructor(@Inject(MAT_DIALOG_DATA) public data: { message: string }) {}
-
-  ngOnDestroy() {
-    // this.errorSub.unsubscribe();
   }
 
   closeModal() {

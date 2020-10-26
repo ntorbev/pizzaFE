@@ -3,7 +3,8 @@
   top: 150px;
   left: 40%;
   width: 20%;
-  background: white;
+  background-color: white;
+  color: black;
   padding: 0.5rem;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }

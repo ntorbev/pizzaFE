@@ -1,13 +1,24 @@
-<mat-list >
-  <mat-list-item *ngFor="let message of offers">
-    <h3 matLine> {{message}} </h3>
-  </mat-list-item>
-  <mat-divider></mat-divider>
-</mat-list>
+<mat-card class="example-card"  *ngFor="let offer of offers">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{offer.pizzaName}}</mat-card-title>
+    <mat-card-subtitle>{{offer.description}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="{{offer.pizzaImg}}" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p>
+      {{offer.description}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="sendOrder(quantity.value, offer.pizzaName)" color="accent">Order</button>
+    <input type="number" placeholder="how many" #quantity>
+  </mat-card-actions>
+<!--  <mat-divider></mat-divider>-->
+</mat-card>
 
-
-<input [(ngModel)]="order"  />
-<button (click)="sendOrder()" mat-raised-button color="primary">Send</button>
-<br>
+<!--<input [(ngModel)]="order"  />-->
+<!--<button (click)="sendOrder()" mat-raised-button color="primary">Send</button>-->
+<!--<br>-->
 <button [routerLink]="'/history'" mat-raised-button color="primary">Check history</button>
 
