@@ -1,0 +1,13 @@
+<mat-list >
+  <mat-list-item *ngFor="let message of offers">
+    <h3 matLine> {{message}} </h3>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+</mat-list>
+
+
+<input [(ngModel)]="order"  />
+<button (click)="sendOrder()" mat-raised-button color="primary">Send</button>
+<br>
+<button [routerLink]="'/history'" mat-raised-button color="primary">Check history</button>
+

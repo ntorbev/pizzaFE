@@ -1,0 +1,10 @@
+<mat-list>
+  <mat-list-item *ngFor="let order of orders">
+    <mat-icon matListIcon>folder</mat-icon>
+    <h3 matLine> {{order.holderName}} </h3>
+    <p matLine>
+      <span> {{order.orderPizza}} </span>
+      <span class="demo-2"> -- {{order.orderPizza}} </span>
+    </p>
+  </mat-list-item>
+</mat-list>
